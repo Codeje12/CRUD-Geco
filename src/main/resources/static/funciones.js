@@ -5,20 +5,22 @@ $(function(){
 		stock = $(".stock").val();
 		costo = $(".costo").val();
 		venta = $(".venta").val();
-		console.log(nombreProducto);
 		if(nombreProducto.length == 0 || stock.length == 0 || costo.length == 0
 			||venta.length==0 || descripcion.length==0){
 			alert("no puede dejar campos vacios");
-			location.href="/index";
 		}
+		location.href="/listar";
 	});
 });
 
+$('.btnCancel').on('click',function(){
+		location.href="/listar";
+	});
 
 function eliminar(id){
 	swal({
-  title: "¿Desea eliminar el archivo?",
-  text: "Once deleted, you will not be able to recover this imaginary file!",
+  title: "¿Desea eliminar el registro?",
+  text: "Se eliminara de forma permanente de la base de datos.!",
   icon: "warning",
   buttons: true,
   dangerMode: true,
@@ -26,18 +28,20 @@ function eliminar(id){
 .then((OK) => {
   if (OK) {
 	$.ajax({
-		url:"eliminar/"+id,
+		url:"/delete/" + id ,
 		success: function(res){
 			console.long(res);
 		}
 	});
-    swal("Poof! Your imaginary file has been Eliminado!", {
+    swal("Listo, registro eliminado con exito.", {
       icon: "success",
     }).then((ok)=>{
-		location.href="/listar";
-		});
+		if(ok){
+			location.href="/listar";
+		}
+});
   } else {
-    swal("Your imaginary file is safe!");
+    swal("No eliminaste el registro!");
   }
 });
 }

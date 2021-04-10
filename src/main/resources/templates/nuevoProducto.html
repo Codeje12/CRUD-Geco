@@ -7,6 +7,7 @@
 		
     </head>
 <body>
+<button class="btn btn-primary btnCancel">Volver</button>
 		<div class="container mt-4">
 			<form th:action="@{/save}" th:object=${producto} methodo="POST">
 				<div class="container sm-6"></div>
@@ -18,7 +19,9 @@
 						<label>Id</label>
 						<input th:field="*{id}"type="text" class="form-control" placeholder="codigo producto">
 						<label>nombre producto</label>
-						<input th:field="*{nombreProducto}"type="text" class="form-control nombreProducto" placeholder="Nombre Producto">
+						<input th:field="*{nombreProducto}"type="text" id="nombreProducto"class="form-control nombreProducto" placeholder="Nombre Producto">
+						<small class="form-text text-danger" th:if="${#fields.hasErrors('nombreProducto')}"
+							th:errors="*{nombreProducto}"></small>
 						<label>Descripcion</label>
 						<input th:field="*{Descripcion}"type="text" class="form-control descripcion" placeholder="Descripcion">
 						<label>Ingrese el stock</label>
